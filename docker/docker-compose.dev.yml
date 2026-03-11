@@ -1,0 +1,16 @@
+services:
+
+    postgres:
+        env_file:
+            - ../.env
+        image: postgres:15
+        container_name: pgsql_moviewatch
+        restart: always
+        environment:
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        volumes:
+            - .data/pgdata:/var/lib/postgresql/data
+        ports:
+            - "${DB_PORT}:5432"
