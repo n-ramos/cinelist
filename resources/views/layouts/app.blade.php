@@ -55,6 +55,10 @@
                        class="px-3 py-2 rounded-lg text-sm font-medium transition-all {{ request()->routeIs('proposals') ? 'text-white bg-white/10' : 'text-slate-400 hover:text-white hover:bg-white/5' }}">
                         Propositions
                     </a>
+                    <a href="{{ route('community') }}" wire:navigate
+                       class="px-3 py-2 rounded-lg text-sm font-medium transition-all {{ request()->routeIs('community') ? 'text-white bg-white/10' : 'text-slate-400 hover:text-white hover:bg-white/5' }}">
+                        Communauté
+                    </a>
                 </div>
 
                 {{-- Droite — connecté --}}
@@ -140,28 +144,28 @@
     <nav class="fixed bottom-0 left-0 right-0 z-50 md:hidden glass border-t border-white/5 pb-safe">
         <div class="flex items-center justify-around px-1 h-14">
             <a href="{{ route('dashboard') }}" wire:navigate
-               class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-all {{ request()->routeIs('dashboard') ? 'text-rose-400' : 'text-slate-500 hover:text-slate-300' }}">
+               class="flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-xl transition-all {{ request()->routeIs('dashboard') ? 'text-rose-400' : 'text-slate-500 hover:text-slate-300' }}">
                 <svg class="w-5 h-5" fill="{{ request()->routeIs('dashboard') ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                 </svg>
-                <span class="text-[9px] font-medium">Accueil</span>
+                <span class="text-[10px] font-medium">Accueil</span>
             </a>
             <a href="{{ route('discover') }}" wire:navigate
-               class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-all {{ request()->routeIs('discover') ? 'text-rose-400' : 'text-slate-500 hover:text-slate-300' }}">
+               class="flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-xl transition-all {{ request()->routeIs('discover') ? 'text-rose-400' : 'text-slate-500 hover:text-slate-300' }}">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="{{ request()->routeIs('discover') ? '2.5' : '2' }}" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                 </svg>
-                <span class="text-[9px] font-medium">Découvrir</span>
+                <span class="text-[10px] font-medium">Découvrir</span>
             </a>
             <a href="{{ route('watchlist') }}" wire:navigate
-               class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-all {{ request()->routeIs('watchlist') ? 'text-rose-400' : 'text-slate-500 hover:text-slate-300' }}">
+               class="flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-xl transition-all {{ request()->routeIs('watchlist') ? 'text-rose-400' : 'text-slate-500 hover:text-slate-300' }}">
                 <svg class="w-5 h-5" fill="{{ request()->routeIs('watchlist') ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
                 </svg>
-                <span class="text-[9px] font-medium">Ma liste</span>
+                <span class="text-[10px] font-medium">Ma liste</span>
             </a>
             <a href="{{ route('watched') }}" wire:navigate
-               class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-all {{ request()->routeIs('watched') ? 'text-rose-400' : 'text-slate-500 hover:text-slate-300' }}">
+               class="flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-xl transition-all {{ request()->routeIs('watched') ? 'text-rose-400' : 'text-slate-500 hover:text-slate-300' }}">
                 <svg class="w-5 h-5" fill="{{ request()->routeIs('watched') ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
                     @if(request()->routeIs('watched'))
                         <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
@@ -169,14 +173,21 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                     @endif
                 </svg>
-                <span class="text-[9px] font-medium">Vus</span>
+                <span class="text-[10px] font-medium">Vus</span>
             </a>
             <a href="{{ route('proposals') }}" wire:navigate
-               class="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-all {{ request()->routeIs('proposals') ? 'text-rose-400' : 'text-slate-500 hover:text-slate-300' }}">
+               class="flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-xl transition-all {{ request()->routeIs('proposals') ? 'text-rose-400' : 'text-slate-500 hover:text-slate-300' }}">
                 <svg class="w-5 h-5" fill="{{ request()->routeIs('proposals') ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
                 </svg>
-                <span class="text-[9px] font-medium">Propositions</span>
+                <span class="text-[10px] font-medium">Propositions</span>
+            </a>
+            <a href="{{ route('community') }}" wire:navigate
+               class="flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-xl transition-all {{ request()->routeIs('community') ? 'text-rose-400' : 'text-slate-500 hover:text-slate-300' }}">
+                <svg class="w-5 h-5" fill="{{ request()->routeIs('community') ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+                <span class="text-[10px] font-medium">Amis</span>
             </a>
         </div>
     </nav>

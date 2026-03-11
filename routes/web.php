@@ -33,5 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::livewire('/watchlist', 'pages.watchlist')->name('watchlist');
     Route::livewire('/watched', 'pages.watched')->name('watched');
     Route::livewire('/proposals', 'pages.proposals')->name('proposals');
+    Route::livewire('/community', 'pages.community')->name('community');
     Route::livewire('/profile', 'pages.profile')->name('profile');
 });

@@ -56,6 +56,19 @@
     }
 }
 
+/* Base font-size: 17px — UX recommendation (Apple HIG, Linear, Stripe) */
+/* All Tailwind rem-based utilities scale proportionally */
+html {
+    font-size: 17px;
+}
+
+/* Prevent iOS auto-zoom on input focus (font-size must be >= 16px) */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]),
+select,
+textarea {
+    font-size: max(1rem, 16px);
+}
+
 @layer utilities {
     .glass {
         background: rgba(26, 26, 39, 0.8);
