@@ -32,18 +32,16 @@ RUN composer install \
 
 COPY . .
 
-# Run package discovery with a temporary key (doesn't need a real one)
 RUN APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
     php artisan package:discover --ansi
 
 # =============================================================================
-# Stage 3: Production image (FrankenPHP)
+# Stage 3: Production image (FrankenPHP = PHP 8.5 + Caddy en un seul process)
 # =============================================================================
-FROM dunglas/frankenphp:latest-php8.4-alpine
+FROM dunglas/frankenphp:1-php8.5-alpine
 
 WORKDIR /app
 
-# Install required PHP extensions
 RUN install-php-extensions \
     pdo_pgsql \
     pgsql \
@@ -53,26 +51,18 @@ RUN install-php-extensions \
     zip \
     redis
 
-# PHP & OPcache config
 COPY docker/php/php.ini /usr/local/etc/php/conf.d/app.ini
 COPY docker/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
-
-# Caddy config
 COPY docker/Caddyfile /etc/caddy/Caddyfile
 
-# Copy application (from composer stage, includes vendor/)
 COPY --from=composer --chown=www-data:www-data /app /app
-
-# Copy compiled frontend assets
 COPY --from=node --chown=www-data:www-data /app/public/build /app/public/build
 
-# Ensure writable dirs have correct permissions
 RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions \
         storage/framework/views bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
 
-# Entrypoint
 COPY --chmod=755 docker/entrypoint.prod.sh /entrypoint.sh
 
 EXPOSE 8000
