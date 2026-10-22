@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM dunglas/frankenphp:1-php8.5-alpine AS base
+FROM dunglas/frankenphp:1-php8.5.12-alpine AS base
 
 # Installation des extensions PHP nécessaires
 RUN install-php-extensions \
